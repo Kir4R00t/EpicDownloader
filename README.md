@@ -1,6 +1,9 @@
 # EpicDownloader
 Universal app for downloading all sorts of videos
 
+# Tech Stuff
+Python Kivy ?? or build in Java ?? or in Java & Python ??
+
 ## Potential Downloads:
 - Youtube - Download mp4 or mp3
 - Insta - Download mp4
