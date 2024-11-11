@@ -13,10 +13,7 @@ def sanitize(string):
     return re.sub(r'[<>:"/\\|?*]', '', string)
 
 def youtube(url):
-    #yt = YouTube(url)
-    #yt.streams.get_highest_resolution().download()
-
-    print(f"Downloading {url} . . .")
+    print("Youtube")
 
 def insta(url):
     loader = instaloader.Instaloader(
@@ -51,6 +48,14 @@ def insta(url):
     except Exception as e:
         print(f'Something went wrong: {e}')
 
+def reddit(url):
+    print("Reddit")
+
+def spotify(url):
+    print("Spotify")
+
+def soundcloud(url):
+    print("SoundCloud")
 
 def main():
     url = str(input("Giv a link: "))
