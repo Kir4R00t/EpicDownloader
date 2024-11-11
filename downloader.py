@@ -1,6 +1,7 @@
+from pytube import YouTube
 import instaloader
 import requests
-from pytube import YouTube
+import yt_dlp
 import re
 
 # Example links
@@ -13,7 +14,9 @@ def sanitize(string):
     return re.sub(r'[<>:"/\\|?*]', '', string)
 
 def youtube(url):
-    print("Youtube")
+    ydl_opts = {}
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([url])
 
 def insta(url):
     loader = instaloader.Instaloader(
@@ -59,7 +62,7 @@ def soundcloud(url):
 
 def main():
     url = str(input("Giv a link: "))
-    insta(url)
+    youtube(url)
 
 if __name__ == "__main__":
     main()

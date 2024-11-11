@@ -18,3 +18,4 @@ Python Kivy ?? or build in Java ?? or in Java & Python ??
 
 ## Notes:
 Pytube broken - use yt-dlp meaybe ???? (https://github.com/yt-dlp/yt-dlp)
+For yt_dlp ffmpeg will be needed for best quality
