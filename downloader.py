@@ -16,7 +16,7 @@ def youtube(url):
     #yt = YouTube(url)
     #yt.streams.get_highest_resolution().download()
 
-    print('Pytube is not working for now')
+    print(f"Downloading {url} . . .")
 
 def insta(url):
     loader = instaloader.Instaloader(
