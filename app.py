@@ -67,8 +67,6 @@ class MainApp(BoxLayout):
         # Get the URL from the TextInput
         return self.url_input.text
     
-    # TODO:
-    # Check given url --> use right download function
     def check_source(self, url):
         sources = [
             'youtube',
