@@ -58,8 +58,10 @@ class MainApp(BoxLayout):
         self.add_widget(self.url_input)
         self.add_widget(self.format_spinner)
         self.add_widget(self.download_button)
-        self.info_box.bind(size=self.info_box.setter('text_size'))
         self.add_widget(self.info_box)
+
+        # Binds
+        self.info_box.bind(size=self.info_box.setter('text_size'))
 
     def get_url(self):
         # Get the URL from the TextInput
