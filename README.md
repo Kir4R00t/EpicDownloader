@@ -12,7 +12,7 @@ Python Kivy ?? or build in Java ?? or in Java & Python ??
 - Soundcloud - Download mp3
 
 ## Other functionalities
-- Choosable resolution
+- Choosable resolution --> ffmpeg allow conversion ?
 - Auto link detection ?
 - Format converter ?
 
