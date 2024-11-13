@@ -12,7 +12,7 @@ import re
 
 # Remove chars that windows considers illegal in a file name
 def sanitize(string):
-    return re.sub(r'[<>:"/\\|?*]', '', string)
+    return re.sub(r'[<>:"/\\|?*]#', '', string)
 
 class YTDLPLogger:
     def debug(self, msg):
@@ -56,10 +56,9 @@ def insta(url):
     try:
         post = instaloader.Post.from_shortcode(loader.context, shortcode)
         print(f"Title: {post.caption}")
-        print(f"Likes: {post.likes}")
-        print(f"Date: {post.date_utc}")
 
-        title = sanitize(post.caption)
+        # title = sanitize(post.caption) --> weirdly typed titles sometimes break this function
+        title = shortcode
         vid_url = post.video_url
         
         response = requests.get(vid_url, stream=True)
