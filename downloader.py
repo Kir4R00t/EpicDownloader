@@ -12,7 +12,7 @@ import re
 
 # Remove chars that windows considers illegal in a file name
 def sanitize(string):
-    return re.sub(r'[<>:"/\\|?*]#', '', string)
+    return re.sub(r'[<>:"/\\|?*]', '', string)
 
 class YTDLPLogger:
     def debug(self, msg):
@@ -23,7 +23,7 @@ class YTDLPLogger:
 
     def error(self, msg):
         print(f"ERROR: {msg}")
-
+  
 def youtube(url):
     ydl_opts = {
         'outtmpl': '%(title)s.%(ext)s',

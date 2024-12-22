@@ -6,6 +6,7 @@ It's in early dev phase but now you can download things from yt & insta
 https://www.instagram.com/reel/DCFUJ5kxcq4/
 Sometimes titles break downloading functions --> find a better way to get the title or just use shortcode as title
 
+Get best resolution --> allow user to convert (ffmpeg) ?  
 
 ### Potential Downloads:
 - Youtube
