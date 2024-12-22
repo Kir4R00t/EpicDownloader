@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class DownloaderConfig(AppConfig):
+class DownloaderappConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'Downloader'
+    name = 'DownloaderApp'
