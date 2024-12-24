@@ -105,10 +105,15 @@ USE_TZ = True
 # Adding a few lines to make sure that it will load all files
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'DownloaderApp' / 'static']
+'''
+# Not sure if this is needed
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'DownloaderApp/static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+'''
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
