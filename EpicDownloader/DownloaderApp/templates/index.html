@@ -9,36 +9,24 @@
 
 </head>
 <body>
-    <!-- 
+    <!-- For some reason I can't load images from static files in css stylesheet so I have to this here -->
     <style>
         body {
             background-image: url("{% static 'images/background.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            min-height: 100vh;
         }
     </style>
-    -->
-
+    
     <div class="container">
         <h1>Epic Downloader</h1>
-        <form method="POST">
+        <form method="POST" action="{% url 'home' %}">
             {% csrf_token %}
-            <!-- Input bar for YouTube link -->
             <div class="form-group">
-                <label for="video_url">Paste YouTube Link:</label>
-                <input type="url" id="video_url" name="video_url" placeholder="Enter YouTube URL" required>
+                <input type="url" id="url" name="url" placeholder="Paste Your link here" required>
             </div>
-
-            <!-- Dropdown for resolution -->
-            <div class="form-group">
-                <label for="resolution">Choose Resolution:</label>
-                <select id="resolution" name="resolution">
-                    <option value="1080p">1080p</option>
-                    <option value="720p">720p</option>
-                    <option value="480p">480p</option>
-                    <option value="360p">360p</option>
-                </select>
-            </div>
-
-            <!-- Download button -->
+            
             <div class="form-group">
                 <button type="submit" class="btn-download">Download</button>
             </div>
@@ -46,3 +34,16 @@
     </div>
 </body>
 </html>
+
+<!-- Dropdown for resolution -->
+<!-- 
+<div class="form-group">
+    <label for="resolution">Choose Resolution:</label>
+        <select id="resolution" name="resolution">
+            <option value="1080p">1080p</option>
+            <option value="720p">720p</option>
+            <option value="480p">480p</option>
+            <option value="360p">360p</option>
+        </select>
+</div>
+-->
