@@ -11,7 +11,7 @@ class YTDLPLogger:
     def error(self, msg):
         print(f"ERROR: {msg}")
   
-def youtube(url):
+def download(url):
     ydl_opts = {
         'outtmpl': '%(title)s.%(ext)s',
         'format': 'best',

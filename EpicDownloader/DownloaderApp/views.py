@@ -5,7 +5,7 @@ from .utils.download_video import download
 def home(request):
     if request.method == 'POST':
         url = request.POST.get('url')
-        print(f"URL: {url}")
+        print("Passing views")
 
         download(url) # Download video and send to user
 

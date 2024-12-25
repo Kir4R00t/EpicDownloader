@@ -1,7 +1,9 @@
 import instaloader
 import requests
+from django.http import HttpResponse
 
-def insta(url):
+
+def download(url):
     loader = instaloader.Instaloader(
         download_comments=False,
         download_geotags=False,
@@ -10,25 +12,28 @@ def insta(url):
         save_metadata=False
     )
     
-    # For example link it's this part 'DAI2BJRO8A6'
+    # Extract shortcode from the URL
     shortcode = url.split('/')[-2]
     
     try:
         post = instaloader.Post.from_shortcode(loader.context, shortcode)
-        print(f"Title: {post.caption}")
-
-        # title = sanitize(post.caption) --> weirdly typed titles sometimes break this function
-        title = shortcode
         vid_url = post.video_url
-        
+
         response = requests.get(vid_url, stream=True)
 
-        with open(f"{title}.mp4", 'wb') as file:
-            for chunk in response.iter_content(chunk_size=1024):
-                if chunk:
-                    file.write(chunk)
+        # Use an in-memory file to avoid saving on the server
+        from io import BytesIO
+        video_file = BytesIO()
+        for chunk in response.iter_content(chunk_size=1024):
+            if chunk:
+                video_file.write(chunk)
 
-        print(f"Video downloaded successfully as {title}")
+        # Create the HTTP response with the video file
+        video_file.seek(0)  # Move to the beginning of the file
+        response = HttpResponse(video_file, content_type='video/mp4')
+        response['Content-Disposition'] = f'attachment; filename="{shortcode}.mp4"'
+
+        return response
 
     except Exception as e:
-        print(f'Something went wrong: {e}')
+        return HttpResponse(f"Something went wrong: {e}", status=400)
