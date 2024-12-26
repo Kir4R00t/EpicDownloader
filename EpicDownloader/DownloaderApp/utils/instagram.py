@@ -1,6 +1,7 @@
 import instaloader
 import requests
-from django.http import HttpResponse
+import os
+from django.http import FileResponse, HttpResponse
 
 
 def download(url):
@@ -14,26 +15,29 @@ def download(url):
     
     # Extract shortcode from the URL
     shortcode = url.split('/')[-2]
-    
+
     try:
         post = instaloader.Post.from_shortcode(loader.context, shortcode)
         vid_url = post.video_url
 
+        temp_dir = os.path.join(os.path.dirname(__file__), 'temp')
+        os.makedirs(temp_dir, exist_ok=True)
+        
+        file_path = os.path.join(temp_dir, f"{shortcode}.mp4")
+
         response = requests.get(vid_url, stream=True)
+        if response.status_code != 200:
+            return HttpResponse("Failed to fetch video from Instagram", status=400)
 
-        # Use an in-memory file to avoid saving on the server
-        from io import BytesIO
-        video_file = BytesIO()
-        for chunk in response.iter_content(chunk_size=1024):
-            if chunk:
-                video_file.write(chunk)
+        with open(file_path, 'wb') as file:
+            for chunk in response.iter_content(chunk_size=1024):
+                if chunk:
+                    file.write(chunk)
 
-        # Create the HTTP response with the video file
-        video_file.seek(0)  # Move to the beginning of the file
-        response = HttpResponse(video_file, content_type='video/mp4')
+        response = FileResponse(open(file_path, 'rb'), content_type='video/mp4')
         response['Content-Disposition'] = f'attachment; filename="{shortcode}.mp4"'
 
         return response
 
     except Exception as e:
-        return HttpResponse(f"Something went wrong: {e}", status=400)
+        return HttpResponse(f"An error occurred: {e}", status=400)
